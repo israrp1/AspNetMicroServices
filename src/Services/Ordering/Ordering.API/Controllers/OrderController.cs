@@ -1,10 +1,10 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Ordering.Application.Features.Commands.DeleteOrder;
-using Ordering.Application.Features.Commands.UpdateOrder;
+using Ordering.Application.Features.Orders.Commands.DeleteOrder;
+using Ordering.Application.Features.Orders.Commands.UpdateOrder;
 using Ordering.Application.Features.Orders.Commands.CheckoutOrder;
-using Ordering.Application.Features.Queries.GetOrderList;
+using Ordering.Application.Features.Orders.Queries.GetOrderList;
 using System;
 using System.Collections.Generic;
 using System.Net;
@@ -27,7 +27,7 @@ namespace Ordering.API.Controllers
         [ProducesResponseType(typeof(IEnumerable<OrdersVm>), (int)HttpStatusCode.OK)]
         public async Task<ActionResult<IEnumerable<OrdersVm>>> GetOrdersByUserName(string userName)
         {
-            var query = new GetOrdersListQuery(userName);
+            var query = new GetOrderListQuery(userName);
             var orders = await _mediator.Send(query);
             return Ok(orders);
         }
